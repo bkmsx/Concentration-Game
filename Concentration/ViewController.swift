@@ -9,8 +9,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var MAX_FLIP_COUNT = 30
+    let MAX_EASY = 27
+    let MAX_MEDIUM = 31
+    let MAX_HARD = 39
     let MAX_CARDS = 20
+    var MAX_FLIP_COUNT: Int!
     var game : Contrentration!
     var ghostButtons = [UIButton]()
     var imageChoices = [#imageLiteral(resourceName: "am0"), #imageLiteral(resourceName: "am1"), #imageLiteral(resourceName: "am2"), #imageLiteral(resourceName: "am3"), #imageLiteral(resourceName: "am4"), #imageLiteral(resourceName: "am5"), #imageLiteral(resourceName: "am6"), #imageLiteral(resourceName: "am7"), #imageLiteral(resourceName: "am8"), #imageLiteral(resourceName: "am9")]
@@ -27,7 +30,8 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        flipCount = MAX_FLIP_COUNT
+        MAX_FLIP_COUNT = MAX_EASY
+        flipCount = MAX_EASY
         generateBoard(with: 12)
     }
     
@@ -55,7 +59,7 @@ class ViewController: UIViewController {
         let twentyAction = UIAlertAction(title: "Hard", style: .default, handler: {action -> Void in
             self.generateBoard(with: 20)
             self.levelButton.setTitle("Hard", for: .normal)
-            self.MAX_FLIP_COUNT = 50
+            self.MAX_FLIP_COUNT = 39
             self.flipCount = self.MAX_FLIP_COUNT
         })
         alert.addAction(twentyAction)
@@ -63,14 +67,14 @@ class ViewController: UIViewController {
         let sixteenAction = UIAlertAction(title: "Medium", style: .default, handler: {action -> Void in
             self.generateBoard(with: 16)
             self.levelButton.setTitle("Medium", for: .normal)
-            self.MAX_FLIP_COUNT = 40
+            self.MAX_FLIP_COUNT = 31
             self.flipCount = self.MAX_FLIP_COUNT
         })
         alert.addAction(sixteenAction)
         let twelveAction = UIAlertAction(title: "Easy", style: .default, handler: {action -> Void in
             self.generateBoard(with: 12)
             self.levelButton.setTitle("Easy", for: .normal)
-            self.MAX_FLIP_COUNT = 30
+            self.MAX_FLIP_COUNT = 23
             self.flipCount = self.MAX_FLIP_COUNT
         })
         alert.addAction(twelveAction)
@@ -89,10 +93,17 @@ class ViewController: UIViewController {
         let option2 = UIAlertAction(title:"Flowers", style: .default){action -> Void in
             self.imageChoices = [#imageLiteral(resourceName: "fl0"), #imageLiteral(resourceName: "fl1"), #imageLiteral(resourceName: "fl2"), #imageLiteral(resourceName: "fl3"), #imageLiteral(resourceName: "fl4"), #imageLiteral(resourceName: "fl5"), #imageLiteral(resourceName: "fl6"), #imageLiteral(resourceName: "fl7"), #imageLiteral(resourceName: "fl8"), #imageLiteral(resourceName: "fl9")]
             self.images.removeAll()
-             self.resetGame("")
+            self.resetGame("")
         }
         option2.setValue(#imageLiteral(resourceName: "gallery2").withRenderingMode(.alwaysOriginal), forKey: "image")
         alert.addAction(option2)
+        let option3 = UIAlertAction(title:"Ẩm hâm", style: .default){action -> Void in
+            self.imageChoices = [#imageLiteral(resourceName: "e0"), #imageLiteral(resourceName: "e1"), #imageLiteral(resourceName: "e2"), #imageLiteral(resourceName: "e3"), #imageLiteral(resourceName: "e4"), #imageLiteral(resourceName: "e5"), #imageLiteral(resourceName: "e6"), #imageLiteral(resourceName: "e7"), #imageLiteral(resourceName: "e8"), #imageLiteral(resourceName: "e9")]
+            self.images.removeAll()
+            self.resetGame("")
+        }
+        option3.setValue(#imageLiteral(resourceName: "gallery3").withRenderingMode(.alwaysOriginal), forKey: "image")
+        alert.addAction(option3)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
